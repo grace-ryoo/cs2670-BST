@@ -77,24 +77,72 @@ public class BST {
     } // size
 
     public void insert(int element) {
-
+        if (element >= 0) {
+            this.root = insertRecursively(this.root, element);
+        } else {
+            throw new IndexOutOfBoundsException("Cannot insert negative numbers");
+        } // if
     } // insert
 
-    public void delete(int element) {
+    private Node insertRecursively(Node position, int element) {
+        if (position == null) {
+            return new Node(element);
+        } // if
 
+        if (element < this.root.getKey()) { // element is less than
+            position.leftChild = insertRecursively(position.getLeftChild(), element);
+        } else if (element == this.root.getKey()) { // element is equal
+            throw new IllegalArgumentException("Element is already in the tree!");
+        } else { // element is greater than
+            position.rightChild = insertRecursively(position.getRightChild(), element);
+        } // if
+
+        this.counter++;
+        return position;
+    } // insertRecursively
+
+    public void delete(int element) {
+        this.root = deleteRecursively(this.root, element);
     } // delete
 
-    public void preorder() {
+    private Node deleteRecursively(Node position, int element) {
+        throw new UnsupportedOperationException("Method is not yet implemented.");
+/**
+        if (position == null) {
+            return null;
+        } // if
 
+        if (element < this.root.getKey()) { // element is less than
+            position.leftChild = deleteRecursively(position.getLeftChild(), element);
+        } else if (element == this.root.getKey()) { // element to delete
+            if (position.getLeftChild() == null && position.getRightChild() == null) { // leaf node
+                return null;
+            } else if (position.getLeftChild() == null) { // only has right child node
+                return position.getRightChild();
+            } else if (position.getRightChild() == null) { // only has left child node
+                return position.getLeftChild();
+            } else { // has both children nodes, must reallocate positions
+                // need to implement here ****
+            } // if
+        } else { // element is greater than
+            position.rightChild = deleteRecursively(position.getRightChild(), element);
+        } // if
+
+        this.counter--;
+        return position;
+*/
+    } // deleteRecursively
+
+    public void preorder() {
+        throw new UnsupportedOperationException("Method is not yet implemented.");
     } // preorder
 
     public void postorder() {
-
-
+        throw new UnsupportedOperationException("Method is not yet implemented.");
     } // postorder
 
     public void inorder() {
-
+        throw new UnsupportedOperationException("Method is not yet implemented.");
     } // inorder
 
 } // BST
