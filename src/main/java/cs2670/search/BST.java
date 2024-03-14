@@ -8,6 +8,8 @@ public class BST {
     private Node root;
     private int counter;
     private LinkedList<Integer> inordered;
+    private LinkedList<Integer> preordered;
+    private LinkedList<Integer> postordered;
 
     private class Node {
 
@@ -141,12 +143,47 @@ public class BST {
     } // deleteRecursively
 
     public void preorder() {
-        throw new UnsupportedOperationException("Method is not yet implemented.");
+        preordered = new LinkedList<>();
+        preorderRecursively(this.root, preordered);
+        ListIterator<Integer> it = preordered.listIterator();
+        while (it.hasNext()) {
+            System.out.print(it.next());
+            if (it.hasNext()) {
+                System.out.print(", ");
+            } // if
+        } // while
+        System.out.println();
     } // preorder
 
+    private void preorderRecursively(Node position, LinkedList<Integer> list) {
+        if (position != null) {
+            list.add(position.getKey());
+            preorderRecursively(position.getLeftChild(), list);
+            preorderRecursively(position.getRightChild(), list);
+        } // if
+    } // preorderRecursively
+
     public void postorder() {
-        throw new UnsupportedOperationException("Method is not yet implemented.");
+        postordered = new LinkedList<>();
+        postorderRecursively(this.root, postordered);
+        ListIterator<Integer> it = postordered.listIterator();
+        while (it.hasNext()) {
+            System.out.print(it.next());
+            if (it.hasNext()) {
+                System.out.print(", ");
+            } // if
+        } // while
+        System.out.println();
     } // postorder
+
+    private void postorderRecursively(Node position, LinkedList<Integer> list) {
+        if (position != null) {
+            postorderRecursively(position.getLeftChild(), list);
+            postorderRecursively(position.getRightChild(), list);
+            list.add(position.getKey());
+        } // if
+    } // postorderRecursively
+
 
     public void inorder() {
         inordered = new LinkedList<>();
@@ -164,7 +201,7 @@ public class BST {
     private void inorderRecursively(Node position, LinkedList<Integer> list) {
         if (position != null) {
             inorderRecursively(position.getLeftChild(), list);
-            inordered.add(position.getKey());
+            list.add(position.getKey());
             inorderRecursively(position.getRightChild(), list);
         } // if
     } // inorderRecursively
