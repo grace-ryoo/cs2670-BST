@@ -6,11 +6,12 @@ public class BSTTester {
 
     public static void main(String[] args) {
 
+        System.out.println("\n--- BST Tester ---");
         BST tree1 = new BST();
         tree1.insert(3);
         tree1.insert(12);
         tree1.insert(1);
-        System.out.println(tree1);
+        tree1.inorder();
 
 
 

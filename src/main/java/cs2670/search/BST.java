@@ -1,9 +1,13 @@
 package cs2670.search;
 
+import java.util.LinkedList;
+import java.util.ListIterator;
+
 public class BST {
 
     private Node root;
     private int counter;
+    private LinkedList<Integer> inordered;
 
     private class Node {
 
@@ -145,18 +149,24 @@ public class BST {
     } // postorder
 
     public void inorder() {
-        inorderRecursively(this.root);
+        inordered = new LinkedList<>();
+        inorderRecursively(this.root, inordered);
+        ListIterator<Integer> it = inordered.listIterator();
+        while (it.hasNext()) {
+            System.out.print(it.next());
+            if (it.hasNext()) {
+                System.out.print(", ");
+            } // if
+        } // while
+        System.out.println();
     } // inorder
 
-    private void inorderRecursively(Node position) {
-        if (position == null) {
-            return;
+    private void inorderRecursively(Node position, LinkedList<Integer> list) {
+        if (position != null) {
+            inorderRecursively(position.getLeftChild(), list);
+            inordered.add(position.getKey());
+            inorderRecursively(position.getRightChild(), list);
         } // if
-
-        inorderRecursively(position.getLeftChild());
-        System.out.printf("%s ", position.getKey());
-        inorderRecursively(position.getRightChild());
-
     } // inorderRecursively
 
 } // BST
