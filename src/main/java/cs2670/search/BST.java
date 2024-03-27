@@ -85,6 +85,7 @@ public class BST {
     public void insert(int element) {
         if (element >= 0) {
             this.root = insertRecursively(this.root, element);
+            this.counter++;
         } else {
             throw new IndexOutOfBoundsException("Cannot insert negative numbers");
         } // if
@@ -103,12 +104,12 @@ public class BST {
             position.rightChild = insertRecursively(position.getRightChild(), element);
         } // if
 
-        this.counter++;
         return position;
     } // insertRecursively
 
     public void delete(int element) {
         this.root = deleteRecursively(this.root, element);
+        this.counter--;
     } // delete
 
     private Node deleteRecursively(Node position, int element) {
@@ -126,18 +127,26 @@ public class BST {
             } else if (position.getRightChild() == null) { // only has left child node
                 return position.getLeftChild();
             } else { // has both children nodes, must reallocate positions
+                int min = position.getKey();
+                while (position.getLeftChild() != null) {
+                    min = position.getLeftChild().getKey();
+                    position = position.getLeftChild();
+                } // while
+                position.setKey(min);
+                position.rightChild = deleteRecursively(position.getRightChild(), position.getKey());
+/**
                 Node temporary = position.getRightChild();
                 while (temporary != null) {
                     temporary = temporary.getLeftChild();
                 } // while
                 position = temporary;
                 return position;
+*/
             } // if
         } else { // element is greater than
             position.rightChild = deleteRecursively(position.getRightChild(), element);
         } // if
 
-        this.counter--;
         return position;
 
     } // deleteRecursively

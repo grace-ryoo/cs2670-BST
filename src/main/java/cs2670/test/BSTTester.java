@@ -12,12 +12,21 @@ public class BSTTester {
         tree1.insert(3);
         tree1.insert(12);
         tree1.insert(1);
+        System.out.println("size: " + tree1.size());
         System.out.print("inorder(): ");
         tree1.inorder();
         System.out.print("preorder(): ");
         tree1.preorder();
         System.out.print("postorder(): ");
         tree1.postorder();
+
+        tree1.delete(3);
+//        tree1.delete(5);
+        System.out.println("size: " + tree1.size());
+        System.out.println("postorder(): ");
+        tree1.postorder();
+        tree1.size();
+        /**
         System.out.println("tree2");
         BST tree2 = new BST();
         tree2.insert(27);
@@ -34,7 +43,7 @@ public class BSTTester {
         tree2.preorder();
         System.out.print("postorder(): ");
         tree2.postorder();
-
+        */
 
 
 
