@@ -108,17 +108,12 @@ public class BST {
     } // insertRecursively
 
     public void delete(int element) {
-        Node rootReplace = deleteRecursively(this.root, element);
-        if (rootReplace == null) {
-            System.out.println("Element not found!");
-        } else {
-            this.root = rootReplace;
-            this.counter--;
-        } // if
+        this.root = deleteRecursively(this.root, element);
     } // delete
 
     private Node deleteRecursively(Node position, int element) {
         if (position == null) {
+            System.out.println("Element not found!");
             return null;
         } // if
 
@@ -126,10 +121,13 @@ public class BST {
             position.leftChild = deleteRecursively(position.getLeftChild(), element);
         } else if (element == position.getKey()) { // element to delete
             if (position.getLeftChild() == null && position.getRightChild() == null) { // leaf node
+                this.counter--;
                 return null;
             } else if (position.getLeftChild() == null) { // only has right child node
+                this.counter--;
                 return position.getRightChild();
             } else if (position.getRightChild() == null) { // only has left child node
+                this.counter--;
                 return position.getLeftChild();
             } else { // has both children nodes, must reallocate positions
                 position.setKey(findMin(position.getRightChild()));
