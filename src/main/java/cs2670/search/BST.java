@@ -108,8 +108,13 @@ public class BST {
     } // insertRecursively
 
     public void delete(int element) {
-        this.root = deleteRecursively(this.root, element);
-        this.counter--;
+        Node rootReplace = deleteRecursively(this.root, element);
+        if (rootReplace == null) {
+            System.out.println("Element not found!");
+        } else {
+            this.root = rootReplace;
+            this.counter--;
+        } // if
     } // delete
 
     private Node deleteRecursively(Node position, int element) {
@@ -127,29 +132,24 @@ public class BST {
             } else if (position.getRightChild() == null) { // only has left child node
                 return position.getLeftChild();
             } else { // has both children nodes, must reallocate positions
-                int min = position.getKey();
-                while (position.getLeftChild() != null) {
-                    min = position.getLeftChild().getKey();
-                    position = position.getLeftChild();
-                } // while
-                position.setKey(min);
+                position.setKey(findMin(position.getRightChild()));
                 position.rightChild = deleteRecursively(position.getRightChild(), position.getKey());
-/**
-                Node temporary = position.getRightChild();
-                while (temporary != null) {
-                    temporary = temporary.getLeftChild();
-                } // while
-                position = temporary;
-                return position;
-*/
             } // if
         } else { // element is greater than
             position.rightChild = deleteRecursively(position.getRightChild(), element);
         } // if
 
         return position;
-
     } // deleteRecursively
+
+    private int findMin(Node pos) {
+        int min = pos.getKey();
+        while (pos.getLeftChild() != null) {
+            min = pos.getLeftChild().getKey();
+            pos = pos.getLeftChild();
+        } // while
+        return min;
+    } // findMin
 
     public void preorder() {
         preordered = new LinkedList<>();

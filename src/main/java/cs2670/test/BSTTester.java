@@ -19,15 +19,16 @@ public class BSTTester {
         tree1.preorder();
         System.out.print("postorder(): ");
         tree1.postorder();
-
+        System.out.println("delete(3)");
         tree1.delete(3);
-//        tree1.delete(5);
+//        tree1.delete(17); // not printing "Element not found!" message! something is wrong!
+
         System.out.println("size: " + tree1.size());
         System.out.println("postorder(): ");
         tree1.postorder();
         tree1.size();
-        /**
-        System.out.println("tree2");
+
+        System.out.println("\ntree2");
         BST tree2 = new BST();
         tree2.insert(27);
         tree2.insert(35);
@@ -43,8 +44,12 @@ public class BSTTester {
         tree2.preorder();
         System.out.print("postorder(): ");
         tree2.postorder();
-        */
-
+        System.out.println("size: " + tree2.size());
+        tree2.delete(13);
+        System.out.println("delete(13)");
+        System.out.print("postorder(): ");
+        tree2.postorder();
+        System.out.println("size: " + tree2.size());
 
 
 
